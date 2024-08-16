@@ -6,8 +6,8 @@ const cors = require('cors');
 const Message = require('./models/Message');
 const { env } = require('../client/.eslintrc.cjs');
 const corsOptions = {
-    origin: process.env.APPLICATION_URL,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+    origin:process.env.APPLICATION_URL,
+    methods:["GET","POST","PATCH","DELETE"]
 };
 
 const app = express();
@@ -31,7 +31,7 @@ app.get('/api/messages', async (req, res) => {
 // POST a new message
 app.post('/api/messages', async (req, res) => {
     const { messageContent, email, name } = req.body;
-
+     
     try {
         const newMessage = new Message({
             messageContent,
@@ -40,9 +40,11 @@ app.post('/api/messages', async (req, res) => {
         });
 
         const message = await newMessage.save();
-        res.json(message);
+       return res.json(message);
+
+        res.send(email)
     } catch (err) {
-        res.status(500).send('Server Error');
+      return  res.status(500).send('Server Error');
     }
 });
 

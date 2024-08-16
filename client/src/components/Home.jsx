@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import '../index.css'
 import axios from 'axios';
 
@@ -10,7 +10,8 @@ function Home() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+      console.log(import.meta.env.VITE_SERVER_APP_URL);
+      
         try {
             await axios.post(`${import.meta.env.VITE_SERVER_APP_URL}/api/messages`, {
                 messageContent,
